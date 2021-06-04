@@ -23,10 +23,15 @@ function Routes(){
             <Drawer.Screen name="Home"  component={Home} options={{
                 title:'Encurtar Links',
                 drawerIcon:({focused,size,color})=>(
-                    <Ionicons name="cube" color={color} size={size}/>
+                    <Ionicons name={focused?"cube":"cube-outline"} color={color} size={size}/>
                 )
                 }}/>
-            <Drawer.Screen name="MyLinks" component={MyLinks}/>
+            <Drawer.Screen name="MyLinks" component={MyLinks} options={{
+                title:'Meus Links',
+                drawerIcon:({focused,size,color})=>(
+                    <Ionicons name={focused?"stats-chart":"stats-chart-outline"} color={color} size={size}/>
+                )
+                }}/>
         </Drawer.Navigator>
     )
 }
