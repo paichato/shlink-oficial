@@ -9,7 +9,7 @@ const Drawer=createDrawerNavigator();
 function Routes(){
     return(
         <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={Home}/>
+            <Drawer.Screen name="Home"  component={Home}/>
             <Drawer.Screen name="MyLinks" component={MyLinks}/>
         </Drawer.Navigator>
     )
