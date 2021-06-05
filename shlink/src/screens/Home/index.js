@@ -8,6 +8,7 @@ import { ContainerContent, ContainerLogo, Logo, SubTitle, Title,BoxIcon,Containe
 import {Feather} from '@expo/vector-icons'
 import ModalLink from '../../components/modalLink';
 import api from '../../services/api'
+import ModalError from '../../components/modalError';
 
 
 export default function Home() {
@@ -15,24 +16,30 @@ export default function Home() {
     const [url,setUrl]=useState('');
     // const [modalVisible,setModalVisible]=useState(false);
     const [modalVisible,setModalVisible]=useState(false);
+    const [errorMessage,setErrorMessage]=useState('');
+    const [isError,setIsError]=useState(false);
 
     async function handleShortLink(){
 
         try {
-            const response= await api.post('/shorten/',{
+            const response= await api.post('/shorten',{
                 long_url: url
             })
 
             console.log(response.data);
 
         } catch (error) {
-            console.log(error);
-            alert('Something wrong');
+            console.log(error.response.data.description);
+            // alert('Something wrong');
+            setIsError(true);
             Keyboard.dismiss();
+            setErrorMessage(error.response.data.description);
             setUrl('');
+
+            
         }
         // return <Text>Hello</Text>
-       setModalVisible(true);
+    //    setModalVisible(true);
     }
 
     return (
@@ -67,6 +74,9 @@ export default function Home() {
                
                 <Modal visible={modalVisible} transparent onRequestClose={()=>setModalVisible(!modalVisible)}  animationType="slide"  >
                     <ModalLink onCLose={()=>{setModalVisible(!modalVisible)}} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                </Modal>
+                <Modal  visible={isError} transparent onRequestClose={()=>setIsError(!isError)}   animationType="slide"  >
+                    <ModalError errorMessage={errorMessage} onCLose={()=>{setIsError(!isError)}}  />
                 </Modal>
             </LinearGradient>
            
