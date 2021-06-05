@@ -7,7 +7,7 @@ import Menu from '../../components/menu';
 import { ContainerContent, ContainerLogo, Logo, SubTitle, Title,BoxIcon,ContainerInput,Input, ButtonLink, ButtonLinkText } from '../../components/menu/styles';
 import {Feather} from '@expo/vector-icons'
 import ModalLink from '../../components/modalLink';
-
+import api from '../../services/api'
 
 
 export default function Home() {
@@ -16,7 +16,21 @@ export default function Home() {
     // const [modalVisible,setModalVisible]=useState(false);
     const [modalVisible,setModalVisible]=useState(false);
 
-    function handleShortLink(){
+    async function handleShortLink(){
+
+        try {
+            const response= await api.post('/shorten/',{
+                long_url: url
+            })
+
+            console.log(response.data);
+
+        } catch (error) {
+            console.log(error);
+            alert('Something wrong');
+            Keyboard.dismiss();
+            setUrl('');
+        }
         // return <Text>Hello</Text>
        setModalVisible(true);
     }
@@ -41,7 +55,7 @@ export default function Home() {
                     <BoxIcon>
                     <Feather name="link" size={22} color="#fff"/>
                     </BoxIcon>
-                    <Input value={url} onChangeText={(txt)=>setUrl(txt)} autoCapitalize="none" autoCorrect={false} keyboardType="url" placeholderTextColor="white" placeholder="Cole o seu link aqui..."/>
+                    <Input value={url} onChangeText={(txt)=>setUrl(txt)} autoCapitalize="none" autoCorrect={false} keyboardType="url" placeholderTextColor="white" placeholder="Paste your link here..."/>
                 </ContainerInput>
 
                 <ButtonLink onPress={handleShortLink} >
