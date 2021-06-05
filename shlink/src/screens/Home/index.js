@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient';
 
 import StatusBarPage from '../../components/statusBar'
@@ -9,34 +9,43 @@ import {Feather} from '@expo/vector-icons'
 
 
 export default function Home() {
+
+    const [url,setUrl]=useState('');
+
+    function handleShortLink(){
+        return <Text>Hello</Text>
+    }
+
     return (
+        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+  
         <LinearGradient style={{flex:1,justifyContent:'center'}} colors={['#243949','#517fa4']}>
-            <StatusBarPage barStyle="light-content" backgroundColor="#243949"/>
-            <Text>Home</Text>
-            <Menu/>
-            <ContainerLogo>
-                <Logo source={require('../../assets/shLink-logo.png')}/>
-            </ContainerLogo>
+                <StatusBarPage barStyle="light-content" backgroundColor="#243949"/>
+            
+                <Menu/>
+                <ContainerLogo>
+                    <Logo source={require('../../assets/shLink-logo.png')}/>
+                </ContainerLogo>
 
-            <ContainerContent>
-                <Title>Sh Link</Title>
-                <SubTitle>Paste your link to shorten</SubTitle>
+                <ContainerContent>
+                    <Title>Sh Link</Title>
+                    <SubTitle>Paste your link to shorten</SubTitle>
 
-                <ContainerInput>
-                <BoxIcon>
-                 <Feather name="link" size={22} color="#fff"/>
-                </BoxIcon>
-                <Input placeholderTextColor="white" placeholder="Cole o seu link aqui..."/>
-            </ContainerInput>
+                    <ContainerInput>
+                    <BoxIcon>
+                    <Feather name="link" size={22} color="#fff"/>
+                    </BoxIcon>
+                    <Input value={url} onChangeText={(txt)=>setUrl(txt)} autoCapitalize="none" autoCorrect={false} keyboardType="url" placeholderTextColor="white" placeholder="Cole o seu link aqui..."/>
+                </ContainerInput>
 
-            <ButtonLink>
-                <ButtonLinkText>
-                    Generate Link
-                </ButtonLinkText>
-            </ButtonLink>
-            </ContainerContent>
+                <ButtonLink onPress={handleShortLink}>
+                    <ButtonLinkText>
+                        Generate Link
+                    </ButtonLinkText>
+                </ButtonLink>
+                </ContainerContent>
 
-           
-        </LinearGradient>
+            </LinearGradient>
+            </TouchableWithoutFeedback>
     )
 }
