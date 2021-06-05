@@ -12,14 +12,16 @@ import ModalLink from '../../components/modalLink';
 export default function Home() {
 
     const [url,setUrl]=useState('');
+    // const [modalVisible,setModalVisible]=useState(false);
     const [modalVisible,setModalVisible]=useState(false);
 
     function handleShortLink(){
         // return <Text>Hello</Text>
-        setModalVisible(true);
+       setModalVisible(true);
     }
 
     return (
+        <>
         <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
   
         <LinearGradient style={{flex:1,justifyContent:'center'}} colors={['#243949','#517fa4']}>
@@ -41,17 +43,19 @@ export default function Home() {
                     <Input value={url} onChangeText={(txt)=>setUrl(txt)} autoCapitalize="none" autoCorrect={false} keyboardType="url" placeholderTextColor="white" placeholder="Cole o seu link aqui..."/>
                 </ContainerInput>
 
-                <ButtonLink onPress={handleShortLink}>
+                <ButtonLink onPress={handleShortLink} >
                     <ButtonLinkText>
                         Generate Link
                     </ButtonLinkText>
                 </ButtonLink>
                 </ContainerContent>
-                <Modal visible={modalVisible} transparent animationType="slide" onRequestClose={()=>setModalVisible(!modalVisible)} >
+               
+                <Modal visible={true}  animationType="slide"  >
                     <ModalLink/>
                 </Modal>
-
             </LinearGradient>
+           
             </TouchableWithoutFeedback>
+            </>
     )
 }
