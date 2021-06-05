@@ -7,8 +7,8 @@ import Menu from '../../components/menu';
 
 export default function Home() {
     return (
-        <LinearGradient style={{flex:1,justifyContent:'center'}} colors={['#89f7fe','#66a6ff']}>
-            <StatusBarPage barStyle="dark-content" backgroundColor="#89f7fe"/>
+        <LinearGradient style={{flex:1,justifyContent:'center'}} colors={['#243949','#517fa4']}>
+            <StatusBarPage barStyle="light-content" backgroundColor="#243949"/>
             <Text>Home</Text>
             <Menu/>
         </LinearGradient>
