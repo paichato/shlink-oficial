@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableWithoutFeedback, Keyboard, Modal } from 'react-native'
+import { View, Text, TouchableWithoutFeedback, Keyboard, Modal, ActivityIndicator } from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient';
 
 import StatusBarPage from '../../components/statusBar'
@@ -18,8 +18,11 @@ export default function Home() {
     const [modalVisible,setModalVisible]=useState(false);
     const [errorMessage,setErrorMessage]=useState('');
     const [isError,setIsError]=useState(false);
+    const [isLoading,setIsLoading]=useState(false);
 
     async function handleShortLink(){
+
+        setIsLoading(true);
 
         try {
             const response= await api.post('/shorten',{
@@ -27,15 +30,19 @@ export default function Home() {
             })
 
             console.log(response.data);
+            setIsLoading(false);
+            setModalVisible(true);
+            setUrl('');
 
         } catch (error) {
-            console.log(error.response.data.description);
+            // console.log(error.response.data.description);
             // alert('Something wrong');
+            setIsLoading(false);
             setIsError(true);
             Keyboard.dismiss();
             setErrorMessage(error.response.data.description);
             setUrl('');
-
+            
             
         }
         // return <Text>Hello</Text>
@@ -66,9 +73,14 @@ export default function Home() {
                 </ContainerInput>
 
                 <ButtonLink onPress={handleShortLink} >
-                    <ButtonLinkText>
+                    {
+                        isLoading ? <ActivityIndicator color="black" size="large"/>
+                        :
+                        <ButtonLinkText>
                         Generate Link
-                    </ButtonLinkText>
+                        </ButtonLinkText>
+                    }
+                    
                 </ButtonLink>
                 </ContainerContent>
                
