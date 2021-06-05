@@ -19,6 +19,7 @@ export default function Home() {
     const [errorMessage,setErrorMessage]=useState('');
     const [isError,setIsError]=useState(false);
     const [isLoading,setIsLoading]=useState(false);
+    const [data,setData]=useState({});
 
     async function handleShortLink(){
 
@@ -30,6 +31,7 @@ export default function Home() {
             })
 
             console.log(response.data);
+            setData(response.data);
             setIsLoading(false);
             setModalVisible(true);
             setUrl('');
@@ -85,7 +87,7 @@ export default function Home() {
                 </ContainerContent>
                
                 <Modal visible={modalVisible} transparent onRequestClose={()=>setModalVisible(!modalVisible)}  animationType="slide"  >
-                    <ModalLink onCLose={()=>{setModalVisible(!modalVisible)}} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                    <ModalLink data={data} onCLose={()=>{setModalVisible(!modalVisible)}} modalVisible={modalVisible} setModalVisible={setModalVisible} />
                 </Modal>
                 <Modal  visible={isError} transparent onRequestClose={()=>setIsError(!isError)}   animationType="slide"  >
                     <ModalError errorMessage={errorMessage} onCLose={()=>{setIsError(!isError)}}  />

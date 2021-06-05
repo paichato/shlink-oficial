@@ -7,17 +7,17 @@ import Clipboard from 'expo-clipboard' ;
 
 
 
-export default function ModalLink({onCLose}) {
+export default function ModalLink({onCLose,data}) {
 
     function copyLink(){
-        Clipboard.setString('https://ustro.co.mz');
-
+        Clipboard.setString(`${data.link}`);
+        alert('Link has been copied!')
     }
 
     async function handleShare(){
         try {
             const result= await Share.share({
-                message: `Link:http://ustro.co.mz`
+                message: `Link: ${data.link}`
             })
             if(result.action === Share.sharedAction){
                 if(result.activityType){
@@ -52,10 +52,10 @@ export default function ModalLink({onCLose}) {
 
                 <LinkArea>
                 <Title>Link encurtado</Title>
-                <LongUrl numberOfLines={1}>https://ustro.co.mz</LongUrl>
+                <LongUrl numberOfLines={1}>{data.long_url}</LongUrl>
 
                 <ShortLinkArea onPress={copyLink} activeOpacity={1}>
-                    <ShortLinkUrl numberOfLines={1} >https://bit.ly/abc</ShortLinkUrl>
+                    <ShortLinkUrl numberOfLines={1} >{data.link}</ShortLinkUrl>
                     <TouchableOpacity onPress={copyLink}>
                         <Feather name="copy" color="#fff" size={25}/>
                     </TouchableOpacity>
