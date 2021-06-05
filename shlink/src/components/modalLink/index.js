@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 // import ModalContainer, { Container, Header,Title,LongUrl,LinkArea,ShortLinkArea,ShortLinkUrl } from './styles'
 import {Feather} from '@expo/vector-icons'
 import { Container, Header, LinkArea, LongUrl, ModalContainer, ShortLinkArea, ShortLinkUrl, Title } from './styles'
@@ -7,13 +7,16 @@ import { Container, Header, LinkArea, LongUrl, ModalContainer, ShortLinkArea, Sh
 
 
 
-export default function ModalLink({setModalVisible,modalVisible}) {
+export default function ModalLink({onCLose}) {
     return (
         <ModalContainer>
-            <View style={{flex:1}}></View>
+            <TouchableWithoutFeedback onPress={onCLose}>
+                <View style={{flex:1}}></View>
+            </TouchableWithoutFeedback>
+            
             <Container>
                 <Header>
-                    <TouchableOpacity onPress={()=>setModalVisible(!modalVisible)}>
+                    <TouchableOpacity onPress={onCLose}>
                         <Feather name="x" color="#274143" size={30}/>
                     </TouchableOpacity>
                     <TouchableOpacity>
