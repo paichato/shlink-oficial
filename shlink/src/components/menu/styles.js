@@ -20,3 +20,24 @@ justify-content: center;
 margin-top: 15px;
 
 `
+
+export const ContainerContent=styled.View`
+margin-top: 15px;
+
+
+`
+
+export const Title=styled.Text`
+font-size: 35px;
+color: #fff;
+font-weight: bold;
+text-align: center;
+
+`
+export const SubTitle=styled.Text`
+font-size: 20px;
+color: #fff;
+text-align: center;
+padding-bottom: 10px;
+
+`

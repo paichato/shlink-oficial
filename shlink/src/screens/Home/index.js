@@ -4,7 +4,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 
 import StatusBarPage from '../../components/statusBar'
 import Menu from '../../components/menu';
-import { ContainerLogo, Logo } from '../../components/menu/styles';
+import { ContainerContent, ContainerLogo, Logo, SubTitle, Title } from '../../components/menu/styles';
 
 export default function Home() {
     return (
@@ -15,6 +15,11 @@ export default function Home() {
             <ContainerLogo>
                 <Logo source={require('../../assets/shLink-logo.png')}/>
             </ContainerLogo>
+
+            <ContainerContent>
+                <Title>Sh Link</Title>
+                <SubTitle>Paste your link to shorten</SubTitle>
+            </ContainerContent>
         </LinearGradient>
     )
 }
