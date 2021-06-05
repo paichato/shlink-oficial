@@ -65,3 +65,4 @@ export default function ModalLink({onCLose,data}) {
         </ModalContainer>
     )
 }
+//setting up
