@@ -50,8 +50,8 @@ export default function Home() {
                 </ButtonLink>
                 </ContainerContent>
                
-                <Modal visible={modalVisible} onRequestClose={()=>setModalVisible(!modalVisible)}  animationType="slide"  >
-                    <ModalLink/>
+                <Modal visible={modalVisible} transparent onRequestClose={()=>setModalVisible(!modalVisible)}  animationType="slide"  >
+                    <ModalLink modalVisible={modalVisible} setModalVisible={setModalVisible} />
                 </Modal>
             </LinearGradient>
            

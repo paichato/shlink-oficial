@@ -7,12 +7,13 @@ import { Container, Header, LinkArea, LongUrl, ModalContainer, ShortLinkArea, Sh
 
 
 
-export default function ModalLink() {
+export default function ModalLink({setModalVisible,modalVisible}) {
     return (
         <ModalContainer>
+            <View style={{flex:1}}></View>
             <Container>
                 <Header>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>setModalVisible(!modalVisible)}>
                         <Feather name="x" color="#274143" size={30}/>
                     </TouchableOpacity>
                     <TouchableOpacity>
@@ -23,10 +24,10 @@ export default function ModalLink() {
 
                 <LinkArea>
                 <Title>Link encurtado</Title>
-                <LongUrl>https://ustro.co.mz</LongUrl>
+                <LongUrl numberOfLines={1}>https://ustro.co.mz</LongUrl>
 
-                <ShortLinkArea>
-                    <ShortLinkUrl>https://bit.ly/abc</ShortLinkUrl>
+                <ShortLinkArea activeOpacity={1}>
+                    <ShortLinkUrl numberOfLines={1} >https://bit.ly/abc</ShortLinkUrl>
                     <TouchableOpacity>
                         <Feather name="copy" color="#fff" size={25}/>
                     </TouchableOpacity>
