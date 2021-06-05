@@ -4,7 +4,9 @@ import {LinearGradient} from 'expo-linear-gradient';
 
 import StatusBarPage from '../../components/statusBar'
 import Menu from '../../components/menu';
-import { ContainerContent, ContainerLogo, Logo, SubTitle, Title } from '../../components/menu/styles';
+import { ContainerContent, ContainerLogo, Logo, SubTitle, Title,BoxIcon,ContainerInput,Input, ButtonLink, ButtonLinkText } from '../../components/menu/styles';
+import {Feather} from '@expo/vector-icons'
+
 
 export default function Home() {
     return (
@@ -19,7 +21,22 @@ export default function Home() {
             <ContainerContent>
                 <Title>Sh Link</Title>
                 <SubTitle>Paste your link to shorten</SubTitle>
+
+                <ContainerInput>
+                <BoxIcon>
+                 <Feather name="link" size={22} color="#fff"/>
+                </BoxIcon>
+                <Input placeholderTextColor="white" placeholder="Cole o seu link aqui..."/>
+            </ContainerInput>
+
+            <ButtonLink>
+                <ButtonLinkText>
+                    Generate Link
+                </ButtonLinkText>
+            </ButtonLink>
             </ContainerContent>
+
+           
         </LinearGradient>
     )
 }
