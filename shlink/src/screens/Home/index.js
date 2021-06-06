@@ -53,7 +53,7 @@ export default function Home() {
 
     return (
         <>
-        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss() }>
   
         <LinearGradient style={{flex:1,justifyContent:'center'}} colors={['#243949','#517fa4']}>
                 <StatusBarPage barStyle="light-content" backgroundColor="#243949"/>
