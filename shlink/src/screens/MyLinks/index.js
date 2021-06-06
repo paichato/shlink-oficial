@@ -5,7 +5,7 @@ import {Container,Title,ListLinks} from './styles'
 import Menu from '../../components/menu'
 import ListItem from '../../components/listItem'
 import {useIsFocused} from '@react-navigation/native';
-import {getLinksSaved} from '../../utils/storeLinks'
+import {deleteLink, getLinksSaved} from '../../utils/storeLinks'
 import ModalLink from '../../components/modalLink'
 
 export default function MyLinks() {
@@ -32,6 +32,13 @@ export default function MyLinks() {
         console.log(item);
     }
 
+    async function handleDelete(id){
+       const result= await deleteLink(links,id);
+       setLinks(result);
+
+    }
+    
+
     return (
         <Container>
             <StatusBarPage barStyle="light-content" backgroundColor="#172742"/>
@@ -39,7 +46,7 @@ export default function MyLinks() {
             <Title>My Links</Title>
             <ListLinks data={links} 
             keyExtractor={(item)=> String(item.id)}
-            renderItem={({item})=><ListItem selectedItem={handleItem} data={item}/>}
+            renderItem={({item})=><ListItem selectedItem={handleItem} deleteItem={handleDelete} data={item}/>}
             contentContainerStyle={{paddingBottom: 20}}
             showsVerticalScrollIndicator={false}
             />

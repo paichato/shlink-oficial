@@ -37,4 +37,11 @@ try {
 
 export async function deleteLink(links,id){
 
+    let myLinks=links.filter((item)=>{
+        return (item.id !== id)
+    })
+    await AsyncStorage.setItem('@shLinks',JSON.stringify(myLinks));
+    console.log('link deletado');
+
+    return myLinks;
 }
