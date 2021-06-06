@@ -1,16 +1,24 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export async function geLinksSaved(key){
-    const myLinks= await AsyncStorage.getAllKeys(key);
+export async function getLinksSaved(key){
+    try {
+        const myLinks= await AsyncStorage.getItem(key);
 
-    let linksaveds=JSOn.parse(myLinks) || [] ;
+        let linksaveds=JSON.parse(myLinks) || [] ;
+    
+        return linksaveds;
 
-    return linksaveds;
+    } catch (error) {
+        console.log(error);
+    }
+
+   
 }
 
 
 export async function saveLink(key,newLink){
-
+try {
     let linksStored= await getLinksSaved(key);
 
     const hasLink = linksStored.some(link=>link.id === newLink.id);
@@ -22,6 +30,11 @@ export async function saveLink(key,newLink){
 
     linksStored.push(newLink);
     await AsyncStorage.setItem( key,JSON.stringify(linksStored));
+    console.log('sucesso');
+} catch (error) {
+    console.log(error);
+}
+    
 
 }
 

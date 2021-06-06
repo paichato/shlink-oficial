@@ -9,7 +9,7 @@ import {Feather} from '@expo/vector-icons'
 import ModalLink from '../../components/modalLink';
 import api from '../../services/api'
 import ModalError from '../../components/modalError';
-
+import {saveLink,geLinksSaved} from '../../utils/storeLinks'
 
 export default function Home() {
 
@@ -23,30 +23,46 @@ export default function Home() {
 
     async function handleShortLink(){
 
-        setIsLoading(true);
-
-        try {
-            const response= await api.post('/shorten',{
-                long_url: url
-            })
-
-            console.log(response.data);
-            setData(response.data);
-            setIsLoading(false);
-            setModalVisible(true);
-            setUrl('');
-
-        } catch (error) {
-            // console.log(error.response.data.description);
-            // alert('Something wrong');
-            setIsLoading(false);
+        if(url=== ''){
+            setErrorMessage('Url cannot be empty!')
             setIsError(true);
-            Keyboard.dismiss();
-            setErrorMessage(error.response.data.description);
-            setUrl('');
             
-            
+        }else{
+
+            setIsLoading(true);
+
+            try {
+                const response= await api.post('/shorten',{
+                    long_url: url
+                })
+    
+                console.log(response.data);
+                setData(response.data);
+                setIsLoading(false);
+                setModalVisible(true);
+                setUrl('');
+
+                try {
+                    saveLink('@shLinks',JSON.stringify(response.data));
+                } catch (error) {
+                    console.log(error);
+                }
+                
+    
+            } catch (error) {
+                // console.log(error.response.data.description);
+                // alert('Something wrong');
+                setIsLoading(false);
+                setIsError(true);
+                Keyboard.dismiss();
+                setErrorMessage(error.response.data.description);
+                setUrl('');
+                
+                
+            }
         }
+
+       
         // return <Text>Hello</Text>
     //    setModalVisible(true);
     }
