@@ -43,7 +43,7 @@ export default function Home() {
                 setUrl('');
 
                 try {
-                    saveLink('@shLinks',JSON.stringify(response.data));
+                    saveLink('@shLinks',response.data);
                 } catch (error) {
                     console.log(error);
                 }
