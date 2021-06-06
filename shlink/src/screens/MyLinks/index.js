@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Modal } from 'react-native'
 import StatusBarPage from '../../components/statusBar'
-import {Container,Title,ListLinks} from './styles'
+import {Container,Title,ListLinks, ContainerEmpty, WarningText} from './styles'
 import Menu from '../../components/menu'
 import ListItem from '../../components/listItem'
 import {useIsFocused} from '@react-navigation/native';
@@ -44,6 +44,13 @@ export default function MyLinks() {
             <StatusBarPage barStyle="light-content" backgroundColor="#172742"/>
             <Menu/>
             <Title>My Links</Title>
+            {links.length ===0 && (
+                <ContainerEmpty>
+                    <WarningText>
+                        You dont have any links yet 😢
+                    </WarningText>
+                </ContainerEmpty>
+            )}
             <ListLinks data={links} 
             keyExtractor={(item)=> String(item.id)}
             renderItem={({item})=><ListItem selectedItem={handleItem} deleteItem={handleDelete} data={item}/>}
