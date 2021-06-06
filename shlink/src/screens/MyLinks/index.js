@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Modal } from 'react-native'
 import StatusBarPage from '../../components/statusBar'
 import {Container,Title,ListLinks} from './styles'
 import Menu from '../../components/menu'
@@ -9,6 +9,8 @@ import {getLinksSaved} from '../../utils/storeLinks'
 import ModalLink from '../../components/modalLink'
 
 export default function MyLinks() {
+
+    const isFocused=useIsFocused();
 
     const [links,setLinks]=useState([]);
     const [data,setData]=useState({});
@@ -22,7 +24,13 @@ export default function MyLinks() {
             console.log(result);
         }
         getLinks();
-    },[])
+    },[isFocused])
+
+    function handleItem(item){
+        setData(item);
+        setModalVisible(true);
+        console.log(item);
+    }
 
     return (
         <Container>
@@ -31,7 +39,7 @@ export default function MyLinks() {
             <Title>My Links</Title>
             <ListLinks data={links} 
             keyExtractor={(item)=> String(item.id)}
-            renderItem={({item})=><ListItem data={item}/>}
+            renderItem={({item})=><ListItem selectedItem={handleItem} data={item}/>}
             contentContainerStyle={{paddingBottom: 20}}
             showsVerticalScrollIndicator={false}
             />
