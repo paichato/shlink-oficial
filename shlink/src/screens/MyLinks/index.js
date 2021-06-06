@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Modal } from 'react-native'
+import { View, Text, Modal, ActivityIndicator } from 'react-native'
 import StatusBarPage from '../../components/statusBar'
 import {Container,Title,ListLinks, ContainerEmpty, WarningText} from './styles'
 import Menu from '../../components/menu'
@@ -15,12 +15,14 @@ export default function MyLinks() {
     const [links,setLinks]=useState([]);
     const [data,setData]=useState({});
     const [modalVisible,setModalVisible]=useState(false);
+    const [isLoading,setIsLoading]=useState(true);
 
 
     useEffect(()=>{
         async function getLinks(){
             const result= await getLinksSaved('@shLinks');
             setLinks(result);
+            setIsLoading(false);
             console.log(result);
         }
         getLinks();
@@ -44,7 +46,14 @@ export default function MyLinks() {
             <StatusBarPage barStyle="light-content" backgroundColor="#172742"/>
             <Menu/>
             <Title>My Links</Title>
-            {links.length ===0 && (
+
+            {isLoading && (
+                <ContainerEmpty>
+                    <ActivityIndicator color="white" size={25}/>
+                </ContainerEmpty>
+            )}
+
+            {!isLoading && links.length ===0 && (
                 <ContainerEmpty>
                     <WarningText>
                         You dont have any links yet 😢
