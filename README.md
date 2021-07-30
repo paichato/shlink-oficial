@@ -81,7 +81,7 @@ Users should be able to:
 
 ## Dependecies 💾
 [react native](https://reactnative.dev/)|expo|styled-components
----|---|---|---
+---|---|---
 expo-clipboard|Async storage|axios
 
 ## Why
